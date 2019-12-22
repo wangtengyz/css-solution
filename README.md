@@ -246,3 +246,5 @@ export default class CssSolution extends Component {
 部分效果展示：
 ![举例](./src/assets/001.png)
 
+【css-solution】github地址：https://github.com/wangtengyz/css-solution
+
