@@ -1,0 +1,26 @@
+// cssmoudule less  compose组合样式 global 全局
+// CSS Modules 使用技巧
+// 不使用选择器，只使用class名来定义样式
+// 不叠加多个class
+// 所有样式通过composes组合来实现复用
+// 不嵌套
+.base {
+  font-size: 20px;
+}
+
+.normal {
+  composes: base;
+  color: #333;
+  background-color: pink;
+}
+
+.disabled {
+  composes: normal;
+  color: red;
+}
+// 开启全局样式
+:global {
+  .test1 {
+    color: blue;
+  }
+}

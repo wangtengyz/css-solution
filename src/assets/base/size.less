@@ -1,0 +1,44 @@
+// 示例 类名 = "类型-大小"
+// className="margin-top-xs" 表示 margin-top：5px 外顶边距样式
+// className="padiing-left-xl" 表示 padiing-left：30px 内左边距离样式
+// className="padiing-lr-xl" 表示 padiing：0 30px 内边左右距离样式
+@xs: 5px;
+@sm: 10px;
+@def: 15px;
+@lg: 20px;
+@xl: 30px;
+
+@sizeList: @xs, @sm, @def, @lg, @xl;
+@sizeTypeList: xs, sm, def, lg, xl;
+// 外内边距
+.mpLoop(@mp, @type, @size){
+    .@{mp}-top-@{type} {
+        @{mp}-top: @size;
+    }
+    .@{mp}-bottom-@{type} {
+        @{mp}-bottom: @size;
+    }
+    .@{mp}-left-@{type} {
+        @{mp}-left: @size;
+    }
+    .@{mp}-right-@{type} {
+        @{mp}-right: @size;
+    }
+    .@{mp}-tb-@{type} {
+        @{mp}: @size 0;
+    }
+    .@{mp}-lr-@{type} {
+        @{mp}: 0 @size;
+    }
+    .@{mp}-@{type} {
+        @{mp}: @size;
+    }
+}
+
+.loopSize(@i) when (@i < (length(@sizeList) + 1)) {
+    .mpLoop(margin, extract(@sizeTypeList, @i), extract(@sizeList, @i));
+    .mpLoop(padding, extract(@sizeTypeList, @i), extract(@sizeList, @i));
+    .loopSize(@i+1);
+}
+
+.loopSize(1);

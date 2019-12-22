@@ -1,0 +1,106 @@
+// 示例 类名 = "类型-颜色"
+// className="boder-bg" 表示 border:1px solid @bg 边框颜色样式
+// className="text-bg" 表示 color: @bg 文字颜色样式
+// className="bg-bg" 表示 background:@bg; 背景颜色样式
+// 定义颜色变量
+@bg:#eff2f6;    // 背景色
+@main:#00c6e4;  // 主色
+@sub:#8a73ed;   // 辅助色
+@red:#ff6d85;   // 红色
+@yellow:#f60;   // 黄色
+@blue:#5296ff;  // 蓝色
+@green:#2c7;    // 绿色
+@gray:#919191;  // 灰色
+@light:#f6f6f6; // 浅灰色
+@dark:#4c5355;  // 深灰色
+@black:#000;    // 黑色
+@white:#fff;    // 深灰色
+@ccc: #cccccc;  // 深灰色
+
+
+@colorList: @bg, @main, @sub, @red, @yellow, @blue, @green, @gray, @light, @dark, @black, @white;
+@colorTypeList: bg, main, sub, red, yellow, blue, green, gray, light, dark, black, white;
+
+.light(@color){lighten(@color,85%)}
+// 边框色函数
+.border(@type,@color) {
+    .border-@{type} {
+        border:1px solid @color;
+    }
+    .border-light-@{type} {
+        border:1px solid .light(@color);
+    }
+}
+// 文字颜色函数
+.text(@type,@color) {
+    .text-@{type} {
+        color:@color;
+    }
+}
+// 背景色函数
+.bg(@type,@color) {
+    .bg-@{type} {
+        background:@color;
+    }
+}
+// + 列表常量
+// - 获取列表的长度  length(@colorList) 
+// - 获取列表元素  extract(@colorList, 3) 
+// Less并没有提供一个for等循环的方法但是可以使用条件语句递归的方法实现
+// + 循环函数
+//     - loop定义循环次数，when条件判断，符合进入函数，不符合不进入函数。之后次数+1，形成循环。
+//     - loop函数调用，直接传值1。
+.loopColor(@i) when (@i < (length(@colorList)+1)) {
+    .border(extract(@colorTypeList, @i), extract(@colorList, @i));
+    .text(extract(@colorTypeList, @i), extract(@colorList, @i));
+    .bg(extract(@colorTypeList, @i), extract(@colorList, @i));
+    .loopColor(@i+1);
+}
+
+.loopColor(1);
+ 
+/* 按钮样式开始 */
+.setBtnColor(@type,@color) {
+    .button-@{type} {
+        border: 1px solid @color ;
+        color: @color;
+        background: @white;
+        border-radius: 6px;
+ 
+        &:hover, &:focus {
+            border-color: mix(@white, @color, 20%);
+            color: mix(@white, @color, 20%);
+            background-color: mix(@white, @color, 90%);
+        }
+ 
+        &:active {
+            border-color: mix(@black, @color, 20%);
+            color: mix(@black, @color, 20%);
+            background-color: mix(@white, @color, 80%);
+        }
+    }
+ 
+    .button.is-disabled {
+        border-color: @ccc;
+        color: @white;
+        background: @ccc;
+ 
+        &:hover, &:focus {
+            border-color: @ccc;
+            color: @white;
+            background: @ccc;
+        }
+ 
+        &:active {
+            border-color: @ccc;
+            color: @white;
+            background: @ccc;
+        }
+    }
+}
+.loopBtnColor(@i) when (@i < (length(@colorList)+1)) {
+    .setBtnColor(extract(@colorTypeList, @i), extract(@colorList, @i));
+    .loopBtnColor(@i+1);
+}
+ 
+.loopBtnColor(1);
