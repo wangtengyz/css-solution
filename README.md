@@ -144,7 +144,9 @@
 ...
 ```
 
-## 四、具体使用方式 -> 直接在div上面写选择器名字即可
+## 四、具体使用方式
+1. 全局引入'./assets/base/index.less'通用样式；
+2. 直接在div上写选择器即可；
 * 代码举例：
 
 ```
@@ -242,5 +244,5 @@ export default class CssSolution extends Component {
 }
 ```
 部分效果展示：
-![举例](https://img.ikstatic.cn/MTU3Njk4ODcyMDMxMiM5NjAjcG5n.png "举例")
+![举例](./src/assets/001.png)
 
