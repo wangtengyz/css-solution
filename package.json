@@ -6,7 +6,7 @@
     "@antv/g6": "^3.0.5-beta.10",
     "@babel/plugin-proposal-decorators": "^7.4.4",
     "antd": "^3.22.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "react": "^16.9.0",
     "react-ace": "^7.0.4",
     "react-dom": "^16.9.0",
